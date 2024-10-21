@@ -1,1 +1,1 @@
-shiny create --template basic-app-plot --mode core --github posit-dev/py-shiny-templates
+shiny create --template basic-app-plot --mode express --github posit-dev/py-shiny-templates
