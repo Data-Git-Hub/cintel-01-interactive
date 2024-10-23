@@ -15,16 +15,21 @@ ui.page_opts(title="PyShiny App with plot", fillable=True)
 
 min_num = 0
 max_num = 1000
-halfway_point = (min_num + max_num) / 2
+halfway_point = (min_num + max_num) // 2
 
 with ui.sidebar():
     ui.input_slider(
         "selected_number_of_bins", "Number of Bins", min_num, max_num, halfway_point
     )
 
+# (4.0) Added solution for 0 error on the slider selection for 0.
 
 @render.plot(alt="A histogram")
 def histogram():
     np.random.seed(19680801)
     x = 100 + 15 * np.random.randn(437)
-    plt.hist(x, input.selected_number_of_bins(), density=True)
+    bins = max(1, input.selected_number_of_bins())
+    plt.hist(x, bins=bins, density=True, edgecolor="black")
+    plt.title(f"Histogram with {bins} bins")
+    plt.xlabel("x Axis")
+    plt.ylabel("y Axis")
